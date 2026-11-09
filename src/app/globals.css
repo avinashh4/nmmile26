@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f3eee3;
+  --color-paper-2: #e9e1cf;
+  --color-paper-3: #dcd1b9;
+  --color-ink: #1b1a17;
+  --color-ink-2: #4a463d;
+  --color-ink-3: #8a8373;
+  --color-seal: #b3261e;
+  --color-seal-2: #8e1c16;
+  --color-sea: #2e5e5a;
+  --color-brass: #c8892b;
+
+  --font-display: var(--font-instrument), "Times New Roman", serif;
+  --font-sans: var(--font-dm), system-ui, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  --rule: rgb(27 26 23 / 0.14);
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.09  0 0 0 0 0.07  0 0 0 0.07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-paper);
+  background-image: var(--grain);
+  font-family: var(--font-sans);
+  font-weight: 450;
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-seal);
+  color: var(--color-paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-seal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Display type */
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+}
+
+.hairline {
+  border-color: var(--rule);
+}
+
+/* A perforated edge, like a tear-off ticket */
+.perforated {
+  background-image: radial-gradient(circle at 6px 0, transparent 5px, var(--color-paper) 5.5px);
+  background-size: 12px 12px;
+  background-repeat: repeat-x;
+  height: 8px;
+}
+
+/* Ink stamp: slightly rotated, rough edged, multiply onto paper */
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  padding: 0.25em 0.6em;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  transform: rotate(-3deg);
+  mix-blend-mode: multiply;
+  mask-image: var(--grain), linear-gradient(#000, #000);
+  mask-composite: exclude;
+}
+
+/* Marquee */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 60s linear infinite;
+}
+
+/* Reveal on scroll, CSS only. Browsers without scroll timelines simply show the content. */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
+  .reveal {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
