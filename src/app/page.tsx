@@ -19,18 +19,18 @@ export default function Home() {
           ringText={`${site.fullName.toUpperCase()}  ·  ${site.host.toUpperCase()}`}
         />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[52%] bg-gradient-to-b sm:h-56 from-paper via-paper/70 to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-[55%] bg-gradient-to-r from-paper/85 via-paper/40 to-transparent lg:block" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-[62%] bg-gradient-to-r from-paper via-paper/75 to-transparent lg:block" />
         <Container className="pointer-events-none relative pt-24 sm:pt-28">
           <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-ink-2">
-            <span className="stamp text-seal">Bahrain {site.year}</span>
+            <span className="stamp text-laurel">Bahrain {site.year}</span>
             <span>Model United Nations at {site.host.split(",")[0]}</span>
           </div>
           <h1 className="display mt-4 text-[clamp(4.5rem,15vw,13rem)] leading-[0.82]">
             {site.shortName}
-            <span className="text-seal italic">{site.edition}</span>
+            <span className="text-laurel">{site.edition}</span>
           </h1>
           <p className="mt-3 max-w-md text-lg leading-snug text-ink-2 sm:text-xl">
-            <span className="display text-2xl text-ink italic sm:text-3xl">{site.theme.title}.</span>
+            <span className="display text-2xl text-ink sm:text-3xl">{site.theme.title}.</span>
             <br />
             <Countdown to={site.startsAt} />
           </p>
@@ -48,7 +48,7 @@ export default function Home() {
             <div key={k} className="flex gap-10">
               {[...councils, ...councils].map((c, i) => (
                 <span key={`${k}-${i}`} className="display flex items-center gap-10 text-3xl">
-                  <span>{c.name}</span>
+                  <span>{c.abbr}</span>
                   <span className="inline-block h-2.5 w-2.5 rotate-45" style={{ background: c.color }} />
                 </span>
               ))}
@@ -66,7 +66,7 @@ export default function Home() {
           <div className="reveal">
             <p className="display text-[clamp(2.4rem,5.4vw,5rem)] leading-[1.02]">
               The world&apos;s problems are argued at summits.{" "}
-              <span className="text-seal italic">They are solved on the street.</span>
+              <span className="text-laurel">They are solved on the street.</span>
             </p>
             <p className="mt-10 max-w-2xl text-xl leading-relaxed text-ink-2">{site.theme.lede}</p>
             <div className="mt-16 grid grid-cols-2 gap-y-10 border-t-2 hairline pt-10 md:grid-cols-4">
@@ -90,10 +90,10 @@ export default function Home() {
               <h2 className="display mt-5 text-[clamp(3rem,7vw,6.5rem)]">
                 {councils.length} rooms.
                 <br />
-                <span className="italic">Pick your side.</span>
+                <span className="text-laurel">Pick your side.</span>
               </h2>
             </div>
-            <Link href="/councils" className="font-semibold underline decoration-seal decoration-2 underline-offset-[6px]">
+            <Link href="/councils" className="font-semibold underline decoration-laurel decoration-2 underline-offset-[6px]">
               Compare all councils
             </Link>
           </div>
@@ -121,7 +121,7 @@ export default function Home() {
                   i % 2 === 0 ? "md:border-r-2 md:pr-10" : "md:pl-10"
                 }`}
               >
-                <span className="display text-4xl text-seal italic transition-transform duration-500 group-hover:-rotate-6">
+                <span className="display text-4xl text-laurel transition-transform duration-500 group-hover:-rotate-6">
                   {r.n}
                 </span>
                 <div>
@@ -140,17 +140,17 @@ export default function Home() {
           <div className="reveal flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="flex items-center gap-3 text-[0.95rem] font-medium text-paper/60">
-                <span className="display text-xl text-brass italic">4.</span>
+                <span className="display text-xl text-gold">4.</span>
                 <span className="h-px w-8 bg-paper/25" />
                 <span>Order of the day</span>
               </p>
               <h2 className="display mt-5 text-[clamp(3rem,7vw,6.5rem)]">
                 Two days,
                 <br />
-                <span className="text-brass italic">one gavel.</span>
+                <span className="text-gold">one gavel.</span>
               </h2>
             </div>
-            <Link href="/schedule" className="font-semibold text-paper underline decoration-brass decoration-2 underline-offset-[6px]">
+            <Link href="/schedule" className="font-semibold text-paper underline decoration-gold decoration-2 underline-offset-[6px]">
               Full schedule
             </Link>
           </div>
@@ -159,7 +159,7 @@ export default function Home() {
               <div key={d.day} className="reveal relative rounded-2xl bg-paper p-7 text-ink sm:p-9">
                 <div className="flex items-baseline justify-between border-b-2 border-dashed hairline pb-5">
                   <p className="display text-4xl">{d.day}</p>
-                  <p className="display text-5xl text-seal italic">{String(di + 1).padStart(2, "0")}</p>
+                  <p className="display text-5xl text-laurel">{String(di + 1).padStart(2, "0")}</p>
                 </div>
                 <ul className="mt-4">
                   {d.items.map((it) => (
@@ -184,7 +184,7 @@ export default function Home() {
           <div className="reveal mb-14">
             <Clause n="5">Try it on</Clause>
             <h2 className="display mt-5 text-[clamp(3rem,7vw,6.5rem)]">
-              Your placard <span className="italic">is waiting.</span>
+              Your placard <span className="text-laurel">is waiting.</span>
             </h2>
           </div>
           <div className="reveal">
@@ -199,11 +199,11 @@ export default function Home() {
           <div className="reveal">
             <Clause n="6">Points of information</Clause>
             <h2 className="display mt-5 text-[clamp(3rem,6vw,5.5rem)]">
-              Questions, <span className="italic">answered.</span>
+              Questions, <span className="text-laurel">answered.</span>
             </h2>
             <p className="mt-6 max-w-sm text-lg text-ink-2">
               Something missing? Write to{" "}
-              <a href={`mailto:${site.email}`} className="font-semibold text-ink underline decoration-seal decoration-2 underline-offset-4">
+              <a href={`mailto:${site.email}`} className="font-semibold text-ink underline decoration-laurel decoration-2 underline-offset-4">
                 {site.email}
               </a>
               .
@@ -214,7 +214,7 @@ export default function Home() {
               <details key={f.q} className="group border-b-2 hairline">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-xl font-medium [&::-webkit-details-marker]:hidden">
                   {f.q}
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border-2 border-ink/15 transition-transform duration-300 group-open:rotate-45 group-open:border-seal group-open:bg-seal group-open:text-paper">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border-2 border-ink/15 transition-transform duration-300 group-open:rotate-45 group-open:border-laurel group-open:bg-laurel group-open:text-paper">
                     +
                   </span>
                 </summary>
@@ -229,7 +229,7 @@ export default function Home() {
       <section className="py-28 sm:py-40">
         <Container className="reveal text-center">
           <p className="display text-[clamp(3.4rem,11vw,10rem)]">
-            The floor <span className="text-seal italic">recognises</span> you.
+            The floor <span className="text-laurel">recognises</span> you.
           </p>
           <p className="mx-auto mt-6 max-w-lg text-xl text-ink-2">
             Applications for delegates, chairs and press open soon. Leave your details and we will write when they do.

@@ -1,21 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Instrument_Serif } from "next/font/google";
+import { Big_Shoulders, Schibsted_Grotesk } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { site } from "@/content/site";
 import "./globals.css";
 
-const display = Instrument_Serif({
-  variable: "--font-instrument",
+// Big Shoulders: condensed civic signage type, built for city banners
+const display = Big_Shoulders({
+  variable: "--font-headline",
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
+  weight: "variable",
+  axes: ["opsz"],
+  fallback: ["Arial Narrow", "Roboto Condensed", "sans-serif"],
+  adjustFontFallback: false,
 });
 
-const sans = DM_Sans({
-  variable: "--font-dm",
+// Schibsted Grotesk: a newspaper grotesque for running text
+const sans = Schibsted_Grotesk({
+  variable: "--font-text",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: "variable",
 });
 
 export const metadata: Metadata = {

@@ -20,11 +20,11 @@ export default function RegisterPage() {
         title={
           open ? (
             <>
-              Take your <span className="text-seal italic">seat.</span>
+              Take your <span className="text-laurel">seat.</span>
             </>
           ) : (
             <>
-              Applications <span className="text-seal italic">open soon.</span>
+              Applications <span className="text-laurel">open soon.</span>
             </>
           )
         }
@@ -47,7 +47,7 @@ export default function RegisterPage() {
               rel="noreferrer"
               className="reveal group relative overflow-hidden rounded-3xl border-2 hairline p-8 transition-colors hover:border-ink sm:p-10"
             >
-              <p className="display text-6xl text-seal italic">{String(i + 1).padStart(2, "0")}</p>
+              <p className="display text-6xl text-laurel">{String(i + 1).padStart(2, "0")}</p>
               <p className="display mt-6 text-5xl">{r.title}</p>
               <p className="mt-3 max-w-sm text-lg text-ink-2">{r.body}</p>
               <p className="mt-8 font-semibold">

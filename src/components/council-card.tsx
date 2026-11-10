@@ -19,10 +19,9 @@ export function CouncilCard({ council, index }: { council: Council; index: numbe
         >
           <div className="flex items-center justify-between text-sm font-medium text-paper/70">
             <span>Council {String(index + 1).padStart(2, "0")}</span>
-            <span>{council.level}</span>
           </div>
-          <p className="display mt-auto text-[clamp(3rem,5vw,4.2rem)]">{council.abbr}</p>
-          <p className="mt-2 pb-10 text-[1.05rem] leading-snug font-medium text-paper/90">{council.name}</p>
+          <p className={`display mt-auto break-words ${council.abbr.length > 7 ? "text-[clamp(2.4rem,3.4vw,3rem)]" : "text-[clamp(3.2rem,5vw,4.6rem)]"}`}>{council.abbr}</p>
+          <p className="mt-2 min-h-[2.6em] pb-10 text-[1.05rem] leading-snug font-medium text-paper/90">{council.name && council.name !== council.abbr ? council.name : ""}</p>
         </div>
         {/* inner frame line */}
         <div
@@ -30,8 +29,8 @@ export function CouncilCard({ council, index }: { council: Council; index: numbe
           style={{ clipPath: "polygon(0 0,100% 0,100% 100%,50% 90%,0 100%)" }}
         />
       </div>
-      <p className="mt-4 text-ink-2 transition-colors group-hover:text-ink">{council.blurb}</p>
-      <p className="mt-2 text-sm font-semibold text-ink">
+      {council.blurb && <p className="mt-4 text-ink-2 transition-colors group-hover:text-ink">{council.blurb}</p>}
+      <p className="mt-4 text-sm font-semibold text-ink">
         {council.agenda.length ? `${council.agenda.length} agenda items` : "Agenda to be announced"}
         <span className="ml-1 inline-block transition-transform group-hover:translate-x-1">→</span>
       </p>

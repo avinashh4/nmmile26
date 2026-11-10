@@ -113,7 +113,7 @@ export const Delegate = forwardRef<DelegateHandle, { look: DelegateLook; idleSee
           {/* lapel badge */}
           <mesh position={[-0.15, 1.08, 0.134]}>
             <circleGeometry args={[0.035, 12]} />
-            <meshStandardMaterial color="#c8892b" metalness={0.4} roughness={0.5} />
+            <meshStandardMaterial color="#b08d4a" metalness={0.4} roughness={0.5} />
           </mesh>
 
           {/* arms */}
@@ -129,7 +129,7 @@ export const Delegate = forwardRef<DelegateHandle, { look: DelegateLook; idleSee
             {look.holds === "folder" && (
               <mesh position={[0.02, -0.5, 0.12]} rotation={[0.1, 0, 0]} castShadow>
                 <boxGeometry args={[0.04, 0.32, 0.24]} />
-                {mat("#b3261e")}
+                {mat("#4e6634")}
               </mesh>
             )}
           </group>

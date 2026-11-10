@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import type { Council } from "@/content/councils";
 import { Delegate, type DelegateHandle, type DelegateLook } from "./delegate";
-import { bannerTexture, floorTexture, placardTexture, sealTexture } from "./textures";
+import { bannerTexture, floorTexture, medallionTexture, placardTexture } from "./textures";
 
 export type HallProps = {
   councils: Council[];
@@ -44,7 +44,7 @@ export function boothLayout(n: number) {
 const PLAYER: DelegateLook = {
   suit: "#2b2a33",
   trousers: "#24232b",
-  tie: "#b3261e",
+  tie: "#4e6634",
   skin: "#c58c62",
   hair: "#1b1a17",
   hairStyle: "short",
@@ -54,7 +54,7 @@ const PLAYER: DelegateLook = {
 const NPCS: { look: DelegateLook; x: number; z: number; face: number }[] = [
   { look: { suit: "#2e5e5a", trousers: "#2a2a2a", tie: "#f3eee3", skin: "#8d5a3b", hair: "#1b1a17", hairStyle: "bun" }, x: -3.3, z: 1.4, face: 1.2 },
   { look: { suit: "#e9e1cf", trousers: "#e9e1cf", tie: "#e9e1cf", skin: "#b67c55", hair: "#1b1a17", hairStyle: "ghutra" }, x: -2.4, z: 2.1, face: -2.1 },
-  { look: { suit: "#6b4a2e", trousers: "#2b2a33", tie: "#c8892b", skin: "#e2b48e", hair: "#5a3a22", hairStyle: "long" }, x: 3.6, z: -0.6, face: -1.4 },
+  { look: { suit: "#6b4a2e", trousers: "#2b2a33", tie: "#b08d4a", skin: "#e2b48e", hair: "#5a3a22", hairStyle: "long" }, x: 3.6, z: -0.6, face: -1.4 },
   { look: { suit: "#3f6fb0", trousers: "#24232b", tie: "#1b1a17", skin: "#7a4a2c", hair: "#1b1a17", hairStyle: "short" }, x: 2.7, z: -1.6, face: 0.9 },
   { look: { suit: "#1b1a17", trousers: "#1b1a17", tie: "#7a4e8c", skin: "#d9a57e", hair: "#2c1d14", hairStyle: "short", holds: "folder" }, x: 4.4, z: 3.4, face: -0.4 },
 ];
@@ -101,12 +101,18 @@ function Floor({
   );
 }
 
-function Rostrum({ letter }: { letter: string }) {
-  const seal = useMemo(() => sealTexture(letter), [letter]);
+function Rostrum({ logo }: { logo: string }) {
+  const [img, setImg] = useState<HTMLImageElement | null>(null);
+  useEffect(() => {
+    const el = new Image();
+    el.onload = () => setImg(el);
+    el.src = logo;
+  }, [logo]);
+  const seal = useMemo(() => medallionTexture(img), [img]);
   const sealRef = useRef<THREE.Mesh>(null!);
   useFrame((s) => {
     sealRef.current.rotation.y = Math.sin(s.clock.elapsedTime * 0.4) * 0.12;
-    sealRef.current.position.y = 3.2 + Math.sin(s.clock.elapsedTime * 0.9) * 0.06;
+    sealRef.current.position.y = 3.45 + Math.sin(s.clock.elapsedTime * 0.9) * 0.06;
   });
   return (
     <group>
@@ -130,7 +136,7 @@ function Rostrum({ letter }: { letter: string }) {
         </mesh>
         <mesh position={[0, 0.6, 0.255]}>
           <circleGeometry args={[0.2, 24]} />
-          <meshStandardMaterial color="#b3261e" roughness={0.7} />
+          <meshStandardMaterial color="#4e6634" roughness={0.7} />
         </mesh>
         {/* gavel */}
         <group position={[0.25, 1.2, 0.05]} rotation={[0, 0.6, 0]}>
@@ -144,9 +150,14 @@ function Rostrum({ letter }: { letter: string }) {
           </mesh>
         </group>
       </group>
-      <mesh ref={sealRef} position={[0, 3.2, -0.5]} castShadow>
-        <circleGeometry args={[1.05, 48]} />
-        <meshStandardMaterial map={seal} transparent alphaTest={0.4} side={THREE.DoubleSide} roughness={0.6} />
+      <mesh ref={sealRef} position={[0, 3.45, -0.5]} castShadow>
+        <circleGeometry args={[1.28, 64]} />
+        <meshStandardMaterial map={seal} roughness={0.75} />
+        {/* gold rim and back plate */}
+        <mesh position={[0, 0, -0.03]}>
+          <circleGeometry args={[1.36, 64]} />
+          <meshStandardMaterial color="#b08d4a" metalness={0.55} roughness={0.35} side={THREE.DoubleSide} />
+        </mesh>
       </mesh>
       {/* seal stand */}
       <mesh position={[0, 1.4, -0.55]}>
@@ -175,7 +186,7 @@ function Booth({
   onPick: () => void;
 }) {
   const banner = useMemo(
-    () => bannerTexture(council.abbr, council.name, council.color, index),
+    () => bannerTexture(council.abbr, council.name ?? "", council.color, index),
     [council, index],
   );
   const placard = useMemo(() => placardTexture(council.abbr, council.color), [council]);
@@ -265,7 +276,7 @@ function Booth({
       </mesh>
       <mesh position={[0, 3.38, -0.55]} rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[0.025, 0.025, 1.6, 8]} />
-        <meshStandardMaterial color="#c8892b" metalness={0.5} roughness={0.4} />
+        <meshStandardMaterial color="#b08d4a" metalness={0.5} roughness={0.4} />
       </mesh>
       <mesh
         ref={flag}
@@ -518,7 +529,7 @@ function TargetMarker({ targetRef }: { targetRef: React.MutableRefObject<THREE.V
   return (
     <mesh ref={ref} rotation={[-Math.PI / 2, 0, 0]} visible={false}>
       <ringGeometry args={[0.22, 0.3, 32]} />
-      <meshBasicMaterial color="#b3261e" />
+      <meshBasicMaterial color="#4e6634" />
     </mesh>
   );
 }
@@ -583,7 +594,7 @@ export default function HallScene(props: HallProps) {
           targetRef.current = new THREE.Vector3(p.x, 0, p.z);
         }}
       />
-      <Rostrum letter="N" />
+      <Rostrum logo="/logo.webp" />
       {councils.map((c, i) => (
         <Booth
           key={c.slug}

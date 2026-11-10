@@ -12,7 +12,7 @@ export default function ContactPage() {
         clause="Contact"
         title={
           <>
-            Write to <span className="text-seal italic">the secretariat.</span>
+            Write to <span className="text-laurel">the secretariat.</span>
           </>
         }
         lede="Schools, parents, sponsors and delegates. We usually reply within two school days."
@@ -21,13 +21,13 @@ export default function ContactPage() {
         <div className="space-y-8">
           <div>
             <p className="text-sm font-medium text-ink-3">Email</p>
-            <a href={`mailto:${site.email}`} className="display text-4xl hover:text-seal">
+            <a href={`mailto:${site.email}`} className="display text-4xl hover:text-laurel">
               {site.email}
             </a>
           </div>
           <div>
             <p className="text-sm font-medium text-ink-3">Instagram</p>
-            <a href={site.instagram} target="_blank" rel="noreferrer" className="display text-4xl hover:text-seal">
+            <a href={site.instagram} target="_blank" rel="noreferrer" className="display text-4xl hover:text-laurel">
               Follow along
             </a>
           </div>

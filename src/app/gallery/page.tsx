@@ -14,7 +14,7 @@ export default function GalleryPage() {
         clause="Gallery"
         title={
           <>
-            From the <span className="text-seal italic">archive.</span>
+            From the <span className="text-laurel">archive.</span>
           </>
         }
         lede="Moments from previous editions. This year's photos go up after the closing ceremony."
@@ -36,7 +36,7 @@ export default function GalleryPage() {
                   </div>
                 )}
               </div>
-              <figcaption className="display mt-3 text-2xl italic">{g.caption}</figcaption>
+              <figcaption className="display mt-3 text-2xl">{g.caption}</figcaption>
             </figure>
           ))}
         </div>

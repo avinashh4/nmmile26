@@ -1,6 +1,8 @@
 // Everything the organising team is likely to edit lives in /src/content.
 // Change copy here; the pages pick it up automatically.
 
+import { councils } from "./councils";
+
 export const site = {
   shortName: "NMMILE",
   edition: "'26",
@@ -25,7 +27,7 @@ export const site = {
 } as const;
 
 export const stats = [
-  { value: "08", label: "Councils" },
+  { value: String(councils.length).padStart(2, "0"), label: "Councils" },
   { value: "200+", label: "Delegates" },
   { value: "02", label: "Days of debate" },
   { value: "01", label: "Closing ceremony" },
@@ -85,7 +87,7 @@ export const faqs = [
   },
   {
     q: "I have never done a MUN. Can I still sign up?",
-    a: "Yes. Several councils are marked as beginner friendly, and every delegate gets the rules of procedure guide plus a training session before the conference.",
+    a: "Yes. The secretariat will point first-timers to the right council, and every delegate gets the rules of procedure guide plus a training session before the conference.",
   },
   {
     q: "Will food be provided?",

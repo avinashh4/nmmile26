@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { nav, site } from "@/content/site";
-import { Seal } from "./seal";
+import { Logo } from "./logo";
 import { RegisterButton } from "./register-button";
 
 export function Header() {
@@ -33,10 +33,10 @@ export function Header() {
     >
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-6 px-4 sm:px-8">
         <Link href="/" className="group flex items-center gap-2.5" aria-label={`${site.shortName} home`}>
-          <Seal size={34} className="transition-transform duration-500 group-hover:rotate-[24deg]" />
+          <Logo size={42} priority className="transition-transform duration-500 group-hover:-rotate-6" />
           <span className="display text-[1.7rem] leading-none">
             {site.shortName}
-            <span className="text-seal italic">{site.edition}</span>
+            <span className="text-laurel">{site.edition}</span>
           </span>
         </Link>
 
@@ -53,7 +53,7 @@ export function Header() {
               >
                 {n.label}
                 {active && (
-                  <span className="absolute inset-x-3.5 -bottom-0.5 h-[2px] rounded-full bg-seal" />
+                  <span className="absolute inset-x-3.5 -bottom-0.5 h-[2px] rounded-full bg-laurel" />
                 )}
               </Link>
             );

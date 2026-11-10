@@ -43,7 +43,7 @@ export function ContactForm({ email }: { email: string }) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          className="display mt-1 w-full border-b-2 border-ink/20 bg-transparent pb-2 text-3xl outline-none focus:border-seal"
+          className="display mt-1 w-full border-b-2 border-ink/20 bg-transparent pb-2 text-3xl outline-none focus:border-laurel"
         />
       </label>
       <label className="mt-8 block">
@@ -53,10 +53,10 @@ export function ContactForm({ email }: { email: string }) {
           onChange={(e) => setMsg(e.target.value)}
           required
           rows={5}
-          className="mt-2 w-full resize-none rounded-2xl border-2 border-ink/15 bg-paper p-4 text-lg outline-none focus:border-seal"
+          className="mt-2 w-full resize-none rounded-2xl border-2 border-ink/15 bg-paper p-4 text-lg outline-none focus:border-laurel"
         />
       </label>
-      <button className="mt-6 inline-flex h-12 items-center rounded-full bg-seal px-6 font-semibold text-paper hover:bg-seal-2">
+      <button className="mt-6 inline-flex h-12 items-center rounded-full bg-laurel px-6 font-semibold text-paper hover:bg-laurel-2">
         Open in my email app
       </button>
     </form>

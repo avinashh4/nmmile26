@@ -132,15 +132,15 @@ export function Hall({
                 className="display grid h-14 w-14 shrink-0 place-items-center rounded-xl text-2xl text-paper"
                 style={{ background: near.color }}
               >
-                {near.abbr.slice(0, 4)}
+                {near.abbr.length <= 5 ? near.abbr : near.abbr[0]}
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-xs font-medium text-ink-3">You have reached</p>
-                <p className="truncate text-lg leading-tight font-semibold">{near.name}</p>
+                <p className="truncate text-lg leading-tight font-semibold">{near.name ?? near.abbr}</p>
               </div>
               <Link
                 href={`/councils/${near.slug}`}
-                className="shrink-0 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-paper transition-colors hover:bg-seal"
+                className="shrink-0 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-paper transition-colors hover:bg-laurel"
               >
                 Enter{!touch && <span className="ml-1.5 text-paper/50">E</span>}
               </Link>

@@ -2,7 +2,7 @@ import * as THREE from "three";
 
 const PAPER = "#f3eee3";
 const INK = "#1b1a17";
-const SEAL = "#b3261e";
+const SEAL = "#4e6634";
 
 function fontFamily(varName: string, fallback: string) {
   if (typeof window === "undefined") return fallback;
@@ -11,8 +11,8 @@ function fontFamily(varName: string, fallback: string) {
 }
 
 export const fonts = () => ({
-  serif: fontFamily("--font-instrument", "Georgia, serif"),
-  sans: fontFamily("--font-dm", "system-ui, sans-serif"),
+  serif: fontFamily("--font-headline", "Arial Narrow, sans-serif"),
+  sans: fontFamily("--font-text", "system-ui, sans-serif"),
 });
 
 function tex(canvas: HTMLCanvasElement) {
@@ -120,7 +120,7 @@ export function floorTexture(title: string, ringText: string) {
 
   // title in front of the rostrum (toward the viewer, +y in canvas = +z in world)
   ctx.fillStyle = "rgba(27,26,23,0.8)";
-  ctx.font = `italic 120px ${serif}`;
+  ctx.font = `800 130px ${serif}`;
   ctx.fillText(title, cx, cx + S * 0.27);
 
   grain(ctx, S, S, 0.045);
@@ -151,10 +151,10 @@ export function bannerTexture(abbr: string, name: string, color: string, index: 
 
   // fit abbreviation
   let size = 230;
-  ctx.font = `${size}px ${serif}`;
+  ctx.font = `800 ${size}px ${serif}`;
   while (ctx.measureText(abbr).width > W - 90 && size > 60) {
     size -= 6;
-    ctx.font = `${size}px ${serif}`;
+    ctx.font = `800 ${size}px ${serif}`;
   }
   ctx.fillText(abbr, W / 2, H * 0.47);
 
@@ -212,38 +212,20 @@ export function placardTexture(text: string, color = INK) {
   return tex(c);
 }
 
-/** The wax seal behind the rostrum. */
-export function sealTexture(letter: string) {
-  const S = 512;
+/** The conference emblem as a cream medallion floating over the rostrum. */
+export function medallionTexture(img: HTMLImageElement | null) {
+  const S = 1024;
   const c = document.createElement("canvas");
   c.width = c.height = S;
   const ctx = c.getContext("2d")!;
-  const { serif } = fonts();
-  const cx = S / 2;
-  ctx.beginPath();
-  const lobes = 16;
-  for (let i = 0; i <= 400; i++) {
-    const a = (i / 400) * Math.PI * 2;
-    const r = S * 0.46 + Math.sin(a * lobes) * 7 + Math.sin(a * 3 + 1) * 3;
-    const x = cx + Math.cos(a) * r;
-    const y = cx + Math.sin(a) * r;
-    if (i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
+  ctx.fillStyle = "#f7f2e6";
+  ctx.fillRect(0, 0, S, S);
+  if (img) {
+    // the artwork is not quite square; fit it inside the disc
+    const k = Math.min(S / img.naturalWidth, S / img.naturalHeight) * 0.94;
+    const w = img.naturalWidth * k;
+    const h = img.naturalHeight * k;
+    ctx.drawImage(img, (S - w) / 2, (S - h) / 2 + S * 0.01, w, h);
   }
-  ctx.fillStyle = SEAL;
-  ctx.fill();
-  ctx.strokeStyle = "rgba(0,0,0,0.25)";
-  ctx.lineWidth = 10;
-  ctx.beginPath();
-  ctx.arc(cx, cx, S * 0.33, 0, Math.PI * 2);
-  ctx.stroke();
-  ctx.font = `${S * 0.5}px ${serif}`;
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillStyle = "rgba(0,0,0,0.28)";
-  ctx.fillText(letter, cx + 5, cx + 9);
-  ctx.fillStyle = "rgba(255,236,226,0.75)";
-  ctx.fillText(letter, cx, cx + 4);
-  grain(ctx, S, S, 0.08);
   return tex(c);
 }

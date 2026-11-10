@@ -23,7 +23,7 @@ export function PlacardMaker() {
           value={country}
           onChange={(e) => setCountry(e.target.value.slice(0, 28))}
           placeholder="Republic of Korea"
-          className="display w-full border-b-2 border-ink/20 bg-transparent pb-2 text-4xl outline-none placeholder:text-ink/25 focus:border-seal sm:text-5xl"
+          className="display w-full border-b-2 border-ink/20 bg-transparent pb-2 text-4xl outline-none placeholder:text-ink/25 focus:border-laurel sm:text-5xl"
           autoComplete="off"
         />
         <button
@@ -58,7 +58,7 @@ export function PlacardMaker() {
         >
           {/* the card */}
           <div className="relative flex h-32 w-[min(78vw,420px)] flex-col items-center justify-center overflow-hidden rounded-[3px] bg-[#fbf8f1] shadow-[0_30px_40px_-25px_rgb(27_26_23/.55)] sm:h-36">
-            <span className="absolute inset-x-0 top-0 h-2 bg-seal" />
+            <span className="absolute inset-x-0 top-0 h-2 bg-laurel" />
             <span className="display px-6 text-center text-[clamp(2rem,6vw,3.4rem)] leading-none">{label}</span>
             <span className="mt-2 text-xs font-medium text-ink-3">NMMILE 2026</span>
           </div>

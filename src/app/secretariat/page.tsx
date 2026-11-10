@@ -20,7 +20,7 @@ function Card({ m, i }: { m: Member; i: number }) {
             <span className="display text-[9rem] text-ink/10">{tba ? "?" : m.name[0]}</span>
           </div>
         )}
-        <span className="stamp absolute top-4 left-4 bg-paper/70 text-seal">{tba ? "Pending" : "Confirmed"}</span>
+        <span className="stamp absolute top-4 left-4 bg-paper/70 text-laurel">{tba ? "Pending" : "Confirmed"}</span>
       </div>
       <p className="display mt-5 text-3xl">{m.name}</p>
       <p className="text-ink-2">{m.role}</p>
@@ -35,7 +35,7 @@ export default function SecretariatPage() {
         clause="Secretariat"
         title={
           <>
-            The people <span className="text-seal italic">behind the gavel.</span>
+            The people <span className="text-laurel">behind the gavel.</span>
           </>
         }
         lede="Students who run the conference: allocations, agendas, logistics and the hundred small things between."

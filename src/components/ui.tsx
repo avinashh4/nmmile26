@@ -8,7 +8,7 @@ export function Container({ children, className = "" }: { children: ReactNode; c
 export function Clause({ n, children }: { n: string; children: ReactNode }) {
   return (
     <p className="flex items-center gap-3 text-[0.95rem] font-medium text-ink-2">
-      <span className="display text-xl text-seal italic">{n}.</span>
+      <span className="display text-xl text-laurel">{n}.</span>
       <span className="h-px w-8 bg-ink/25" />
       <span>{children}</span>
     </p>

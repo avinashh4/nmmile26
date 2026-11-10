@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { nav, site } from "@/content/site";
-import { Seal } from "./seal";
+import { Logo } from "./logo";
 
 export function Footer() {
   return (
@@ -11,7 +11,7 @@ export function Footer() {
           <p className="display text-[clamp(3.5rem,9vw,7.5rem)]">
             See you on
             <br />
-            <span className="text-brass italic">the floor.</span>
+            <span className="text-gold">the floor.</span>
           </p>
         </div>
         <div>
@@ -19,7 +19,7 @@ export function Footer() {
           <ul className="space-y-2">
             {[{ href: "/", label: "Home" }, ...nav, { href: "/register", label: "Register" }].map((n) => (
               <li key={n.href}>
-                <Link href={n.href} className="text-lg text-paper/85 transition-colors hover:text-brass">
+                <Link href={n.href} className="text-lg text-paper/85 transition-colors hover:text-gold">
                   {n.label}
                 </Link>
               </li>
@@ -28,10 +28,10 @@ export function Footer() {
         </div>
         <div>
           <p className="mb-4 text-sm font-medium text-paper/50">Reach the secretariat</p>
-          <a href={`mailto:${site.email}`} className="block text-lg text-paper/85 hover:text-brass">
+          <a href={`mailto:${site.email}`} className="block text-lg text-paper/85 hover:text-gold">
             {site.email}
           </a>
-          <a href={site.instagram} target="_blank" rel="noreferrer" className="mt-2 block text-lg text-paper/85 hover:text-brass">
+          <a href={site.instagram} target="_blank" rel="noreferrer" className="mt-2 block text-lg text-paper/85 hover:text-gold">
             Instagram
           </a>
           <p className="mt-6 text-paper/60">{site.venue}</p>
@@ -39,7 +39,7 @@ export function Footer() {
       </div>
       <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-4 border-t border-paper/10 px-4 py-6 text-sm text-paper/50 sm:px-8">
         <div className="flex items-center gap-3">
-          <Seal size={26} />
+          <Logo size={40} />
           <span>
             {site.shortName} {site.year}. Hosted by {site.host}.
           </span>

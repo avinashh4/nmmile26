@@ -7,13 +7,13 @@
   --color-ink: #1b1a17;
   --color-ink-2: #4a463d;
   --color-ink-3: #8a8373;
-  --color-seal: #b3261e;
-  --color-seal-2: #8e1c16;
+  --color-laurel: #4e6634;
+  --color-laurel-2: #3b4f26;
   --color-sea: #2e5e5a;
-  --color-brass: #c8892b;
+  --color-gold: #b08d4a;
 
-  --font-display: var(--font-instrument), "Times New Roman", serif;
-  --font-sans: var(--font-dm), system-ui, sans-serif;
+  --font-display: var(--font-headline), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-text), system-ui, sans-serif;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -33,19 +33,19 @@ body {
   background-color: var(--color-paper);
   background-image: var(--grain);
   font-family: var(--font-sans);
-  font-weight: 450;
+  font-weight: 420;
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  background: var(--color-seal);
+  background: var(--color-laurel);
   color: var(--color-paper);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-seal);
+  outline: 2px solid var(--color-laurel);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -53,9 +53,9 @@ body {
 /* Display type */
 .display {
   font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 0.92;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  line-height: 0.88;
 }
 
 .hairline {
