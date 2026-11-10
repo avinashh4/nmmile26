@@ -14,9 +14,18 @@ export function Header() {
   const open = openOn === pathname;
   const setOpen = (fn: (o: boolean) => boolean) => setOpenOn(fn(open) ? pathname : null);
   const [scrolled, setScrolled] = useState(false);
+  // slides away while scrolling down, comes back the moment you scroll up
+  const [tucked, setTucked] = useState(false);
 
   useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 12);
+    let last = window.scrollY;
+    const on = () => {
+      const y = window.scrollY;
+      setScrolled(y > 12);
+      if (y < 160 || y < last - 6) setTucked(false);
+      else if (y > last + 6) setTucked(true);
+      last = y;
+    };
     const raf = requestAnimationFrame(on);
     window.addEventListener("scroll", on, { passive: true });
     return () => {
@@ -27,7 +36,9 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-[background-color,box-shadow] duration-300 ${
+      className={`sticky top-0 z-50 transition-[background-color,box-shadow,translate] duration-500 ease-out-soft ${
+        tucked && !open ? "-translate-y-full" : ""
+      } ${
         scrolled || open ? "bg-paper/90 shadow-[0_1px_0_var(--rule)] backdrop-blur-md" : ""
       }`}
     >

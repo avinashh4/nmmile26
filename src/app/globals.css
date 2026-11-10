@@ -88,39 +88,216 @@ body {
   mask-composite: exclude;
 }
 
-/* Marquee */
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
+/* ───────────────────────── Motion ─────────────────────────
+   Scroll-linked effects use CSS scroll timelines: they run off the main
+   thread and need no JS. Browsers without support simply show everything.
+   Everything is switched off for prefers-reduced-motion. */
+
+/* Reading progress along the top edge */
+@keyframes progress {
+  from {
+    transform: scaleX(0);
   }
 }
-.marquee {
-  animation: marquee 60s linear infinite;
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  z-index: 60;
+  background: linear-gradient(90deg, var(--color-laurel), var(--color-gold));
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
 }
 
-/* Reveal on scroll, CSS only. Browsers without scroll timelines simply show the content. */
+/* Page enter, replayed on every navigation via app/template.tsx */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+.page-in {
+  animation: page-in 0.7s var(--ease-out-soft) backwards;
+}
+
+/* Hero headline: letters rise in one after another */
+@keyframes letter-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.55em) rotate(6deg);
+    filter: blur(6px);
+  }
+}
+.letters > span {
+  display: inline-block;
+  animation: letter-in 1.1s var(--ease-out-soft) both;
+  animation-delay: calc(0.25s + var(--i) * 70ms);
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+.fade-up {
+  animation: fade-up 1s var(--ease-out-soft) both;
+  animation-delay: var(--d, 0s);
+}
+
 @keyframes reveal {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(28px);
   }
 }
-@supports (animation-timeline: view()) {
-  .reveal {
-    animation: reveal linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 55%;
+@keyframes word-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.6em);
+  }
+}
+@keyframes photo-open {
+  from {
+    clip-path: inset(14% 10% 14% 10% round 28px);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 20px);
+  }
+}
+@keyframes photo-zoom {
+  from {
+    transform: scale(1.25);
+  }
+}
+@keyframes drift-left {
+  from {
+    opacity: 0;
+    transform: translateX(-60px) rotate(-1.5deg);
+  }
+}
+@keyframes drift-right {
+  from {
+    opacity: 0;
+    transform: translateX(60px) rotate(1.5deg);
+  }
+}
+@keyframes strip {
+  to {
+    transform: translateX(calc(-100% + 100vw));
+  }
+}
+@keyframes settle {
+  from {
+    transform: scale(1.18);
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .marquee {
-    animation: none;
+@supports (animation-timeline: view()) {
+  .scroll-progress {
+    animation: progress linear both;
+    animation-timeline: scroll(root);
   }
   .reveal {
-    animation: none;
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry calc(var(--i, 0) * 6%) entry calc(55% + var(--i, 0) * 6%);
+  }
+  /* headings split into words (see <Words>) */
+  .words > span {
+    display: inline-block;
+    animation: word-rise linear both;
+    animation-timeline: view();
+    animation-range: entry calc(10% + var(--i) * 4%) entry calc(60% + var(--i) * 4%);
+  }
+  .photo-open {
+    animation: photo-open linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 45%;
+  }
+  .photo-open > img,
+  .photo-zoom {
+    animation: photo-zoom linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 0%;
+  }
+  .drift-left,
+  .drift-right {
+    animation: drift-left linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 35%;
+  }
+  .drift-right {
+    animation-name: drift-right;
+  }
+  /* horizontal filmstrip pinned while the section scrolls past */
+  .strip-section {
+    view-timeline-name: --strip;
+  }
+  .strip-track {
+    animation: strip linear both;
+    animation-timeline: --strip;
+    animation-range: contain 0% contain 100%;
+  }
+  .settle {
+    animation: settle linear both;
+    animation-timeline: view();
+    animation-range: entry 0% contain 60%;
+  }
+}
+
+/* Without scroll timelines the filmstrip becomes a swipeable row */
+@supports not (animation-timeline: view()) {
+  .strip-section {
+    height: auto !important;
+  }
+  .strip-sticky {
+    position: static !important;
+    height: auto !important;
+  }
+  .strip-track {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+}
+
+/* FAQ answers open smoothly where supported */
+:root {
+  interpolate-size: allow-keywords;
+}
+details::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition:
+    block-size 0.45s var(--ease-out-soft),
+    content-visibility 0.45s allow-discrete;
+}
+details[open]::details-content {
+  block-size: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+  .scroll-progress {
+    display: none;
   }
   html {
     scroll-behavior: auto;
+  }
+  .strip-section {
+    height: auto !important;
+  }
+  .strip-sticky {
+    position: static !important;
+    height: auto !important;
+  }
+  .strip-track {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
   }
 }

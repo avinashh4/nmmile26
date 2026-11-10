@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { RegisterButton } from "@/components/register-button";
+import { Letters } from "@/components/motion";
 import { Clause, Container } from "@/components/ui";
 import { councils, getCouncil } from "@/content/councils";
 
@@ -42,9 +43,13 @@ export default async function CouncilPage({ params }: PageProps<"/councils/[slug
           <p className="mt-10 font-medium text-paper/70">
             Council {String(i + 1).padStart(2, "0")} of {councils.length}
           </p>
-          <h1 className="display mt-3 text-[clamp(4rem,13vw,11rem)] break-words">{c.abbr}</h1>
+          <h1 className="display mt-3 text-[clamp(4rem,13vw,11rem)] break-words">
+            <Letters text={c.abbr} />
+          </h1>
           {c.name && c.name !== c.abbr && (
-            <p className="display mt-4 max-w-3xl text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.02] text-paper/90">{c.name}</p>
+            <p className="display fade-up mt-4 max-w-3xl text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.02] text-paper/90" style={{ ["--d" as string]: "0.7s" }}>
+              {c.name}
+            </p>
           )}
           {c.blurb && <p className="mt-6 max-w-xl text-xl text-paper/85">{c.blurb}</p>}
         </Container>

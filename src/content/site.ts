@@ -35,23 +35,31 @@ export const stats = [
 
 export const reasons = [
   {
-    n: "I",
+    n: "01",
     title: "Learn how the world negotiates",
+    photo: "/photos/lobbying.webp",
+    alt: "Delegates lobbying with draft papers between sessions",
     body: "Research a country you have never visited and defend its interests under pressure, in its own logic.",
   },
   {
-    n: "II",
+    n: "02",
     title: "Speak, then speak better",
+    photo: "/photos/speaking.webp",
+    alt: "A delegate holding the floor in committee",
     body: "Opening speeches, moderated caucuses, points of order. By the second day you will notice the difference.",
   },
   {
-    n: "III",
+    n: "03",
     title: "Meet the people across the aisle",
+    photo: "/photos/delegates.webp",
+    alt: "Delegates posing together with their badges",
     body: "Delegates from schools across Bahrain, working the same problem from opposite sides of the room.",
   },
   {
-    n: "IV",
+    n: "04",
     title: "Leave with something on paper",
+    photo: "/photos/drafting.webp",
+    alt: "Delegates huddled over a draft resolution",
     body: "A resolution with your clauses in it, an award if you earn it, and a certificate either way.",
   },
 ];
@@ -79,6 +87,20 @@ export const schedule = [
     ],
   },
 ];
+
+// Photos from NMMUN 2023 used across the homepage. Swap files in /public/photos.
+export const photos = {
+  theme: { src: "/photos/placards.webp", alt: "Delegates holding up their phone lights in committee", caption: "Lights up. NMMUN 2023." },
+  closing: { src: "/photos/closing.webp", alt: "Delegates and secretariat at the NMMUN closing ceremony" },
+  inSession: [
+    { src: "/photos/session-1.webp", alt: "Delegates at their desks during a session", caption: "Moderated caucus" },
+    { src: "/photos/session-2.webp", alt: "A full committee room", caption: "A full room" },
+    { src: "/photos/session-3.webp", alt: "Delegates listening to a speech", caption: "Points of information" },
+    { src: "/photos/session-4.webp", alt: "Delegates raising their placards", caption: "Placards up" },
+    { src: "/photos/session-5.webp", alt: "A packed committee room", caption: "Standing room only" },
+    { src: "/photos/session-6.webp", alt: "Delegates working on a laptop together", caption: "Unmoderated caucus" },
+  ],
+};
 
 export const faqs = [
   {

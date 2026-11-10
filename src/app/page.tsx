@@ -1,12 +1,16 @@
+import Image from "next/image";
 import Link from "next/link";
 import { HallMount as Hall } from "@/components/hall/hall-mount";
 import { CouncilCard } from "@/components/council-card";
 import { Countdown } from "@/components/countdown";
+import { CountUp } from "@/components/count-up";
+import { Letters, Reveal, Words } from "@/components/motion";
 import { PlacardMaker } from "@/components/placard-maker";
+import { ReasonsScroller } from "@/components/reasons-scroller";
 import { RegisterButton } from "@/components/register-button";
 import { Clause, Container } from "@/components/ui";
 import { councils } from "@/content/councils";
-import { faqs, reasons, schedule, site, stats } from "@/content/site";
+import { faqs, photos, reasons, schedule, site, stats } from "@/content/site";
 
 export default function Home() {
   return (
@@ -18,65 +22,74 @@ export default function Home() {
           title={`${site.shortName} ${site.edition}`}
           ringText={`${site.fullName.toUpperCase()}  ·  ${site.host.toUpperCase()}`}
         />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[52%] bg-gradient-to-b sm:h-56 from-paper via-paper/70 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[52%] bg-gradient-to-b from-paper via-paper/70 to-transparent sm:h-56" />
         <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-[62%] bg-gradient-to-r from-paper via-paper/75 to-transparent lg:block" />
         <Container className="pointer-events-none relative pt-24 sm:pt-28">
-          <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-ink-2">
+          <div className="fade-up flex flex-wrap items-center gap-3 text-sm font-medium text-ink-2" style={{ ["--d" as string]: "0.1s" }}>
             <span className="stamp text-laurel">Bahrain {site.year}</span>
             <span>Model United Nations at {site.host.split(",")[0]}</span>
           </div>
           <h1 className="display mt-4 text-[clamp(4.5rem,15vw,13rem)] leading-[0.82]">
-            {site.shortName}
-            <span className="text-laurel">{site.edition}</span>
+            <Letters text={site.shortName} />
+            <Letters text={site.edition} offset={site.shortName.length + 1} className="text-laurel" />
           </h1>
-          <p className="mt-3 max-w-md text-lg leading-snug text-ink-2 sm:text-xl">
+          <p className="fade-up mt-3 max-w-md text-lg leading-snug text-ink-2 sm:text-xl" style={{ ["--d" as string]: "1s" }}>
             <span className="display text-2xl text-ink sm:text-3xl">{site.theme.title}.</span>
             <br />
             <Countdown to={site.startsAt} />
           </p>
         </Container>
-        <div className="absolute right-4 bottom-6 hidden text-right text-sm text-ink-2 sm:right-8 lg:block">
+        <div className="fade-up absolute right-4 bottom-6 hidden text-right text-sm text-ink-2 sm:right-8 lg:block" style={{ ["--d" as string]: "1.6s" }}>
           <p className="font-medium text-ink">Walk the floor.</p>
           <p>Every banner is a council.</p>
         </div>
-      </section>
-
-      {/* ─── Ticker ─── */}
-      <div className="overflow-hidden border-y-2 hairline bg-paper-2/60 py-3" aria-hidden>
-        <div className="marquee flex w-max gap-10 whitespace-nowrap">
-          {[0, 1].map((k) => (
-            <div key={k} className="flex gap-10">
-              {[...councils, ...councils].map((c, i) => (
-                <span key={`${k}-${i}`} className="display flex items-center gap-10 text-3xl">
-                  <span>{c.abbr}</span>
-                  <span className="inline-block h-2.5 w-2.5 rotate-45" style={{ background: c.color }} />
-                </span>
-              ))}
-            </div>
-          ))}
+        {/* scroll cue */}
+        <div className="fade-up pointer-events-none absolute bottom-6 left-4 hidden items-center gap-3 text-sm font-medium text-ink-2 sm:left-8 lg:flex" style={{ ["--d" as string]: "1.8s" }}>
+          <span className="relative block h-9 w-5 rounded-full border-2 border-ink/30">
+            <span className="absolute top-1.5 left-1/2 h-2 w-[3px] -translate-x-1/2 animate-bounce rounded-full bg-laurel" />
+          </span>
+          Scroll for the brief
         </div>
-      </div>
+      </section>
 
       {/* ─── Theme ─── */}
       <section className="py-28 sm:py-36">
         <Container className="grid gap-12 lg:grid-cols-[0.35fr_1fr]">
-          <div className="reveal">
+          <Reveal>
             <Clause n="1">This year&apos;s theme</Clause>
-          </div>
-          <div className="reveal">
-            <p className="display text-[clamp(2.4rem,5.4vw,5rem)] leading-[1.02]">
-              The world&apos;s problems are argued at summits.{" "}
-              <span className="text-laurel">They are solved on the street.</span>
+          </Reveal>
+          <div>
+            <p className="display text-[clamp(2.6rem,5.8vw,5.4rem)] leading-[0.98]">
+              <Words text="The world's problems are argued at summits." />{" "}
+              <Words text="They are solved on the street." className="text-laurel" />
             </p>
-            <p className="mt-10 max-w-2xl text-xl leading-relaxed text-ink-2">{site.theme.lede}</p>
-            <div className="mt-16 grid grid-cols-2 gap-y-10 border-t-2 hairline pt-10 md:grid-cols-4">
-              {stats.map((s) => (
-                <div key={s.label}>
-                  <p className="display text-6xl sm:text-7xl">{s.value}</p>
-                  <p className="mt-1 font-medium text-ink-2">{s.label}</p>
-                </div>
-              ))}
+            <Reveal>
+              <p className="mt-10 max-w-2xl text-xl leading-relaxed text-ink-2">{site.theme.lede}</p>
+            </Reveal>
+          </div>
+        </Container>
+
+        {/* wide photo that opens up as it scrolls in */}
+        <Container className="mt-20">
+          <figure>
+            <div className="photo-open relative aspect-[16/9] overflow-hidden rounded-[20px] bg-paper-3 sm:aspect-[21/9]">
+              <Image src={photos.theme.src} alt={photos.theme.alt} fill sizes="(min-width: 1400px) 1340px, 100vw" className="object-cover" />
             </div>
+            <figcaption className="mt-3 flex justify-between text-sm text-ink-3">
+              <span>{photos.theme.caption}</span>
+              <span>New Millennium School, Bahrain</span>
+            </figcaption>
+          </figure>
+        </Container>
+
+        <Container>
+          <div className="mt-16 grid grid-cols-2 gap-y-10 border-t-2 hairline pt-10 md:grid-cols-4">
+            {stats.map((s, i) => (
+              <Reveal key={s.label} i={i}>
+                <CountUp value={s.value} className="display block text-7xl sm:text-8xl" />
+                <p className="mt-1 font-medium text-ink-2">{s.label}</p>
+              </Reveal>
+            ))}
           </div>
         </Container>
       </section>
@@ -84,24 +97,28 @@ export default function Home() {
       {/* ─── Councils ─── */}
       <section className="bg-paper-2/50 py-28 sm:py-36">
         <Container>
-          <div className="reveal flex flex-wrap items-end justify-between gap-6">
+          <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <Clause n="2">The councils</Clause>
+              <Reveal>
+                <Clause n="2">The councils</Clause>
+              </Reveal>
               <h2 className="display mt-5 text-[clamp(3rem,7vw,6.5rem)]">
-                {councils.length} rooms.
+                <Words text={`${councils.length} rooms.`} />
                 <br />
-                <span className="text-laurel">Pick your side.</span>
+                <Words text="Pick your side." className="text-laurel" />
               </h2>
             </div>
-            <Link href="/councils" className="font-semibold underline decoration-laurel decoration-2 underline-offset-[6px]">
-              Compare all councils
-            </Link>
+            <Reveal>
+              <Link href="/councils" className="font-semibold underline decoration-laurel decoration-2 underline-offset-[6px]">
+                Compare all councils
+              </Link>
+            </Reveal>
           </div>
           <div className="mt-16 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
             {councils.map((c, i) => (
-              <div key={c.slug} className="reveal">
+              <Reveal key={c.slug} i={i % 4}>
                 <CouncilCard council={c} index={i} />
-              </div>
+              </Reveal>
             ))}
           </div>
         </Container>
@@ -110,44 +127,64 @@ export default function Home() {
       {/* ─── Why ─── */}
       <section className="py-28 sm:py-36">
         <Container>
-          <div className="reveal">
+          <Reveal>
             <Clause n="3">Why delegates come back</Clause>
-          </div>
-          <div className="mt-12 grid border-t-2 hairline md:grid-cols-2">
-            {reasons.map((r, i) => (
-              <div
-                key={r.n}
-                className={`reveal group grid grid-cols-[4rem_1fr] gap-4 border-b-2 hairline py-10 md:py-14 ${
-                  i % 2 === 0 ? "md:border-r-2 md:pr-10" : "md:pl-10"
-                }`}
-              >
-                <span className="display text-4xl text-laurel transition-transform duration-500 group-hover:-rotate-6">
-                  {r.n}
-                </span>
-                <div>
-                  <h3 className="display text-4xl sm:text-5xl">{r.title}</h3>
-                  <p className="mt-4 max-w-md text-lg leading-relaxed text-ink-2">{r.body}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          </Reveal>
+          <h2 className="display mt-5 mb-12 text-[clamp(3rem,7vw,6.5rem)]">
+            <Words text="Two days that" /> <Words text="change how you argue." className="text-laurel" />
+          </h2>
+          <ReasonsScroller reasons={reasons} />
         </Container>
       </section>
 
+      {/* ─── In session: a filmstrip that slides sideways as you scroll down ─── */}
+      <section className="strip-section relative h-[260vh] bg-ink text-paper" aria-label="Photos from NMMUN 2023">
+        <div className="strip-sticky sticky top-0 flex h-[100svh] flex-col justify-center overflow-hidden">
+          <Container>
+            <p className="flex items-center gap-3 text-[0.95rem] font-medium text-paper/60">
+              <span className="display text-xl text-gold">4.</span>
+              <span className="h-px w-8 bg-paper/25" />
+              <span>In session</span>
+            </p>
+            <h2 className="display mt-5 text-[clamp(3rem,7vw,6.5rem)]">
+              Last year, <span className="text-gold">on the floor.</span>
+            </h2>
+          </Container>
+          <div className="strip-track mt-12 flex w-max gap-6 px-4 sm:px-8">
+            {photos.inSession.map((p, i) => (
+              <figure key={p.src} className="w-[78vw] shrink-0 snap-center sm:w-[46vw] lg:w-[34vw]">
+                <div className={`relative aspect-[4/3] overflow-hidden rounded-2xl ${i % 2 ? "lg:mt-16" : ""}`}>
+                  <Image src={p.src} alt={p.alt} fill sizes="(min-width: 1024px) 34vw, 78vw" className="object-cover" />
+                </div>
+                <figcaption className="mt-3 flex items-baseline gap-3">
+                  <span className="display text-2xl text-gold">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-medium text-paper/80">{p.caption}</span>
+                </figcaption>
+              </figure>
+            ))}
+            <div className="flex w-[60vw] shrink-0 items-center sm:w-[34vw] lg:w-[26vw]">
+              <p className="display text-[clamp(2.6rem,5vw,4.5rem)]">
+                This year, <span className="text-gold">your turn.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ─── Schedule preview ─── */}
-      <section className="bg-ink py-28 text-paper sm:py-36">
+      <section className="bg-ink pt-10 pb-28 text-paper sm:pb-36">
         <Container>
-          <div className="reveal flex flex-wrap items-end justify-between gap-6">
+          <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="flex items-center gap-3 text-[0.95rem] font-medium text-paper/60">
-                <span className="display text-xl text-gold">4.</span>
+                <span className="display text-xl text-gold">5.</span>
                 <span className="h-px w-8 bg-paper/25" />
                 <span>Order of the day</span>
               </p>
               <h2 className="display mt-5 text-[clamp(3rem,7vw,6.5rem)]">
-                Two days,
+                <Words text="Two days," />
                 <br />
-                <span className="text-gold">one gavel.</span>
+                <Words text="one gavel." className="text-gold" />
               </h2>
             </div>
             <Link href="/schedule" className="font-semibold text-paper underline decoration-gold decoration-2 underline-offset-[6px]">
@@ -156,7 +193,10 @@ export default function Home() {
           </div>
           <div className="mt-16 grid gap-6 lg:grid-cols-2">
             {schedule.map((d, di) => (
-              <div key={d.day} className="reveal relative rounded-2xl bg-paper p-7 text-ink sm:p-9">
+              <div
+                key={d.day}
+                className={`${di % 2 ? "drift-right" : "drift-left"} relative rounded-2xl bg-paper p-7 text-ink sm:p-9`}
+              >
                 <div className="flex items-baseline justify-between border-b-2 border-dashed hairline pb-5">
                   <p className="display text-4xl">{d.day}</p>
                   <p className="display text-5xl text-laurel">{String(di + 1).padStart(2, "0")}</p>
@@ -181,68 +221,80 @@ export default function Home() {
       {/* ─── Placard ─── */}
       <section className="py-28 sm:py-36">
         <Container>
-          <div className="reveal mb-14">
-            <Clause n="5">Try it on</Clause>
+          <div className="mb-14">
+            <Reveal>
+              <Clause n="6">Try it on</Clause>
+            </Reveal>
             <h2 className="display mt-5 text-[clamp(3rem,7vw,6.5rem)]">
-              Your placard <span className="text-laurel">is waiting.</span>
+              <Words text="Your placard" /> <Words text="is waiting." className="text-laurel" />
             </h2>
           </div>
-          <div className="reveal">
+          <Reveal>
             <PlacardMaker />
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* ─── FAQ ─── */}
       <section className="bg-paper-2/50 py-28 sm:py-36">
         <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-          <div className="reveal">
-            <Clause n="6">Points of information</Clause>
+          <div>
+            <Reveal>
+              <Clause n="7">Points of information</Clause>
+            </Reveal>
             <h2 className="display mt-5 text-[clamp(3rem,6vw,5.5rem)]">
-              Questions, <span className="text-laurel">answered.</span>
+              <Words text="Questions," /> <Words text="answered." className="text-laurel" />
             </h2>
-            <p className="mt-6 max-w-sm text-lg text-ink-2">
-              Something missing? Write to{" "}
-              <a href={`mailto:${site.email}`} className="font-semibold text-ink underline decoration-laurel decoration-2 underline-offset-4">
-                {site.email}
-              </a>
-              .
-            </p>
+            <Reveal>
+              <p className="mt-6 max-w-sm text-lg text-ink-2">
+                Something missing? Write to{" "}
+                <a href={`mailto:${site.email}`} className="font-semibold text-ink underline decoration-laurel decoration-2 underline-offset-4">
+                  {site.email}
+                </a>
+                .
+              </p>
+            </Reveal>
           </div>
-          <div className="reveal border-t-2 hairline">
-            {faqs.map((f) => (
-              <details key={f.q} className="group border-b-2 hairline">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-xl font-medium [&::-webkit-details-marker]:hidden">
-                  {f.q}
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border-2 border-ink/15 transition-transform duration-300 group-open:rotate-45 group-open:border-laurel group-open:bg-laurel group-open:text-paper">
-                    +
-                  </span>
-                </summary>
-                <p className="max-w-2xl pb-7 text-lg leading-relaxed text-ink-2">{f.a}</p>
-              </details>
+          <div className="border-t-2 hairline">
+            {faqs.map((f, i) => (
+              <Reveal key={f.q} i={i}>
+                <details className="group border-b-2 hairline">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-xl font-medium transition-colors hover:text-laurel [&::-webkit-details-marker]:hidden">
+                    {f.q}
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border-2 border-ink/15 transition-[transform,background-color,border-color,color] duration-300 group-open:rotate-45 group-open:border-laurel group-open:bg-laurel group-open:text-paper">
+                      +
+                    </span>
+                  </summary>
+                  <p className="max-w-2xl pb-7 text-lg leading-relaxed text-ink-2">{f.a}</p>
+                </details>
+              </Reveal>
             ))}
           </div>
         </Container>
       </section>
 
-      {/* ─── CTA ─── */}
-      <section className="py-28 sm:py-40">
-        <Container className="reveal text-center">
+      {/* ─── CTA over the closing ceremony ─── */}
+      <section className="relative overflow-hidden py-36 text-paper sm:py-48">
+        <Image src={photos.closing.src} alt={photos.closing.alt} fill sizes="100vw" className="settle object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/70 to-ink/90" />
+        <Container className="relative text-center">
           <p className="display text-[clamp(3.4rem,11vw,10rem)]">
-            The floor <span className="text-laurel">recognises</span> you.
+            <Words text="The floor" /> <Words text="recognises" className="text-gold" /> <Words text="you." />
           </p>
-          <p className="mx-auto mt-6 max-w-lg text-xl text-ink-2">
-            Applications for delegates, chairs and press open soon. Leave your details and we will write when they do.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <RegisterButton size="lg" />
-            <Link
-              href="/contact"
-              className="inline-flex h-14 items-center rounded-full border-2 border-ink/15 px-7 text-lg font-semibold transition-colors hover:border-ink"
-            >
-              Contact the secretariat
-            </Link>
-          </div>
+          <Reveal>
+            <p className="mx-auto mt-6 max-w-lg text-xl text-paper/85">
+              Applications for delegates, chairs and press open soon. Leave your details and we will write when they do.
+            </p>
+            <div className="mt-10 flex flex-wrap justify-center gap-3">
+              <RegisterButton size="lg" />
+              <Link
+                href="/contact"
+                className="inline-flex h-14 items-center rounded-full border-2 border-paper/30 px-7 text-lg font-semibold transition-colors hover:border-paper hover:bg-paper hover:text-ink"
+              >
+                Contact the secretariat
+              </Link>
+            </div>
+          </Reveal>
         </Container>
       </section>
     </>

@@ -26,9 +26,17 @@ export function PageHead({
 }) {
   return (
     <Container className="pt-12 pb-14 sm:pt-20">
-      <Clause n="§">{clause}</Clause>
-      <h1 className="display mt-6 text-[clamp(3.4rem,10vw,9rem)]">{title}</h1>
-      {lede && <p className="mt-6 max-w-2xl text-xl leading-relaxed text-ink-2">{lede}</p>}
+      <div className="fade-up">
+        <Clause n="§">{clause}</Clause>
+      </div>
+      <h1 className="display fade-up mt-6 text-[clamp(3.4rem,10vw,9rem)]" style={{ ["--d" as string]: "0.12s" }}>
+        {title}
+      </h1>
+      {lede && (
+        <p className="fade-up mt-6 max-w-2xl text-xl leading-relaxed text-ink-2" style={{ ["--d" as string]: "0.3s" }}>
+          {lede}
+        </p>
+      )}
     </Container>
   );
 }

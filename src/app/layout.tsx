@@ -44,6 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
       <body className="flex min-h-dvh flex-col">
+        <div className="scroll-progress" aria-hidden />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
