@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     default: `${site.shortName} ${site.edition} | ${site.host}`,
     template: `%s | ${site.shortName} ${site.edition}`,
   },
-  description: `${site.fullName}, hosted by ${site.host}. ${site.theme.title}.`,
+  description: `${site.fullName}, hosted by ${site.host}. ${site.theme.title}: ${site.theme.translation}.`,
   openGraph: {
     title: `${site.shortName} ${site.edition}`,
     description: site.theme.lede,

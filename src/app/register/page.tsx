@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Register" };
 
 const roles = [
   { title: "Delegate", body: "Represent a member state in one of the councils.", key: "delegate" },
-  { title: "Chair", body: "Run a committee. Prior MUN experience required.", key: "chair" },
+  { title: "Chair", body: "Run a committee. Prior conference experience required.", key: "chair" },
   { title: "Press", body: "Report, photograph and publish the daily bulletin.", key: "press" },
   { title: "Volunteer", body: "Logistics, admin and keeping the day on time.", key: "volunteer" },
 ];

@@ -27,14 +27,16 @@ export default function Home() {
         <Container className="pointer-events-none relative pt-24 sm:pt-28">
           <div className="fade-up flex flex-wrap items-center gap-3 text-sm font-medium text-ink-2" style={{ ["--d" as string]: "0.1s" }}>
             <span className="stamp text-laurel">Bahrain {site.year}</span>
-            <span>Model United Nations at {site.host.split(",")[0]}</span>
+            <span>{site.pillars.join(". ")}. At {site.host.split(",")[0]}.</span>
           </div>
           <h1 className="display mt-4 text-[clamp(4.5rem,15vw,13rem)] leading-[0.82]">
             <Letters text={site.shortName} />
             <Letters text={site.edition} offset={site.shortName.length + 1} className="text-laurel" />
           </h1>
           <p className="fade-up mt-3 max-w-md text-lg leading-snug text-ink-2 sm:text-xl" style={{ ["--d" as string]: "1s" }}>
-            <span className="display text-2xl text-ink sm:text-3xl">{site.theme.title}.</span>
+            <span className="display text-2xl text-ink sm:text-3xl">
+              {site.theme.title}: <span className="text-laurel">{site.theme.translation}.</span>
+            </span>
             <br />
             <Countdown to={site.startsAt} />
           </p>
@@ -60,8 +62,8 @@ export default function Home() {
           </Reveal>
           <div>
             <p className="display text-[clamp(2.6rem,5.8vw,5.4rem)] leading-[0.98]">
-              <Words text="The world's problems are argued at summits." />{" "}
-              <Words text="They are solved on the street." className="text-laurel" />
+              <Words text="Tomorrow is decided" />{" "}
+              <Words text="before it arrives." className="text-laurel" />
             </p>
             <Reveal>
               <p className="mt-10 max-w-2xl text-xl leading-relaxed text-ink-2">{site.theme.lede}</p>

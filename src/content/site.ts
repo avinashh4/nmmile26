@@ -7,8 +7,9 @@ export const site = {
   shortName: "NMMILE",
   edition: "'26",
   year: 2026,
-  // TODO: confirm the full expansion of NMMILE with the secretariat.
-  fullName: "New Millennium Model International Legislative Exercise",
+  // ILE: Innovation, Leadership and Excellence
+  fullName: "New Millennium Model of Innovation, Leadership and Excellence",
+  pillars: ["Innovation", "Leadership", "Excellence"],
   host: "New Millennium School, Bahrain",
   venue: "New Millennium School, Bahrain",
   // Set to an ISO date once confirmed, e.g. "2026-12-12T08:00:00+03:00".
@@ -20,9 +21,10 @@ export const site = {
   email: "nmmun@nms.edu.bh", // TODO: confirm address
   instagram: "https://www.instagram.com/", // TODO: add handle
   theme: {
-    title: "Grassroots to the global stage",
+    title: "Ante Cras",
+    translation: "Before Tomorrow",
     lede:
-      "Global problems are rarely solved at summits alone. They are solved by people on the ground, with simple ideas that travel. This year we ask delegates to argue from the street up.",
+      "Ante cras is Latin for \"before tomorrow\". The money, machines, media and laws that will shape the next decade are being argued over right now. This year delegates step in before tomorrow arrives, and decide what it looks like.",
   },
 } as const;
 
@@ -108,7 +110,7 @@ export const faqs = [
     a: "Fee details will be published when registration opens. It covers lunch on both days, your badge and conference materials.",
   },
   {
-    q: "I have never done a MUN. Can I still sign up?",
+    q: "I have never been to a conference like this. Can I still sign up?",
     a: "Yes. The secretariat will point first-timers to the right council, and every delegate gets the rules of procedure guide plus a training session before the conference.",
   },
   {
