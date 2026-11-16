@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ScheduleSoon } from "@/components/schedule-soon";
 import { Container, PageHead } from "@/components/ui";
 import { schedule } from "@/content/site";
 
@@ -14,8 +15,17 @@ export default function SchedulePage() {
             Order <span className="text-laurel">of the day.</span>
           </>
         }
-        lede="Provisional timings. The final programme is emailed to every delegate the week before the conference."
+        lede={
+          schedule.length
+            ? "Provisional timings. The final programme is emailed to every delegate the week before the conference."
+            : undefined
+        }
       />
+      {schedule.length === 0 && (
+        <Container>
+          <ScheduleSoon card="bg-paper-2/70" notch="bg-paper" />
+        </Container>
+      )}
       <Container className="grid gap-16 lg:grid-cols-2">
         {schedule.map((d, di) => (
           <div key={d.day} className="reveal">

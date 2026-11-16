@@ -8,6 +8,7 @@ import { Letters, Reveal, Words } from "@/components/motion";
 import { PlacardMaker } from "@/components/placard-maker";
 import { ReasonsScroller } from "@/components/reasons-scroller";
 import { RegisterButton } from "@/components/register-button";
+import { ScheduleSoon } from "@/components/schedule-soon";
 import { Clause, Container } from "@/components/ui";
 import { councils } from "@/content/councils";
 import { faqs, photos, reasons, schedule, site, stats } from "@/content/site";
@@ -184,16 +185,23 @@ export default function Home() {
                 <span>Order of the day</span>
               </p>
               <h2 className="display mt-5 text-[clamp(3rem,7vw,6.5rem)]">
-                <Words text="Two days," />
+                <Words text="Order of" />
                 <br />
-                <Words text="one gavel." className="text-gold" />
+                <Words text="the day." className="text-gold" />
               </h2>
             </div>
-            <Link href="/schedule" className="font-semibold text-paper underline decoration-gold decoration-2 underline-offset-[6px]">
-              Full schedule
-            </Link>
+            {schedule.length > 0 && (
+              <Link href="/schedule" className="font-semibold text-paper underline decoration-gold decoration-2 underline-offset-[6px]">
+                Full schedule
+              </Link>
+            )}
           </div>
-          <div className="mt-16 grid gap-6 lg:grid-cols-2">
+          {schedule.length === 0 && (
+            <div className="drift-left mt-16">
+              <ScheduleSoon />
+            </div>
+          )}
+          <div className={`${schedule.length ? "mt-16" : ""} grid gap-6 lg:grid-cols-2`}>
             {schedule.map((d, di) => (
               <div
                 key={d.day}

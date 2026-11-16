@@ -7,9 +7,9 @@ export const site = {
   shortName: "NMMILE",
   edition: "'26",
   year: 2026,
-  // ILE: Innovation, Leadership and Excellence
-  fullName: "New Millennium Model of Innovation, Leadership and Excellence",
-  pillars: ["Innovation", "Leadership", "Excellence"],
+  // ILE: Initiative, Leadership and Excellence
+  fullName: "New Millennium Model of Initiative, Leadership and Excellence",
+  pillars: ["Initiative", "Leadership", "Excellence"],
   host: "New Millennium School, Bahrain",
   venue: "New Millennium School, Bahrain",
   // Set to an ISO date once confirmed, e.g. "2026-12-12T08:00:00+03:00".
@@ -66,29 +66,10 @@ export const reasons = [
   },
 ];
 
-export const schedule = [
-  {
-    day: "Day one",
-    items: [
-      { time: "07:30", what: "Registration and badge collection" },
-      { time: "08:30", what: "Opening ceremony" },
-      { time: "09:30", what: "Committee session I" },
-      { time: "12:00", what: "Lunch" },
-      { time: "13:00", what: "Committee session II" },
-      { time: "15:30", what: "Close of day" },
-    ],
-  },
-  {
-    day: "Day two",
-    items: [
-      { time: "08:00", what: "Committee session III" },
-      { time: "11:30", what: "Voting procedure" },
-      { time: "12:30", what: "Lunch" },
-      { time: "13:30", what: "General Assembly" },
-      { time: "15:00", what: "Closing ceremony and awards" },
-    ],
-  },
-];
+// The programme. While this list is empty the site shows "Schedule coming soon".
+// Fill it in like this when timings are confirmed:
+//   { day: "Day one", items: [{ time: "08:00", what: "Opening ceremony" }, ...] },
+export const schedule: { day: string; items: { time: string; what: string }[] }[] = [];
 
 // Photos from NMMUN 2023 used across the homepage. Swap files in /public/photos.
 export const photos = {
@@ -107,7 +88,7 @@ export const photos = {
 export const faqs = [
   {
     q: "Is there a registration fee?",
-    a: "Fee details will be published when registration opens. It covers lunch on both days, your badge and conference materials.",
+    a: "Fee details will be published when registration opens. It covers lunch each day, your badge and conference materials.",
   },
   {
     q: "I have never been to a conference like this. Can I still sign up?",
@@ -115,7 +96,7 @@ export const faqs = [
   },
   {
     q: "Will food be provided?",
-    a: "Lunch and refreshments are provided on both days. Tell us about dietary requirements on the registration form.",
+    a: "Lunch and refreshments are provided each day. Tell us about dietary requirements on the registration form.",
   },
   {
     q: "How are country allocations decided?",
