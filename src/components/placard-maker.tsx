@@ -3,26 +3,26 @@
 import { useState } from "react";
 
 /**
- * Type a country, get your placard. A small CSS-3D folded card that tilts
+ * Type a company, get your placard. A small CSS-3D folded card that tilts
  * with the pointer. Purely for fun on the landing page.
  */
 export function PlacardMaker() {
-  const [country, setCountry] = useState("");
+  const [company, setCompany] = useState("");
   const [tilt, setTilt] = useState({ x: -8, y: 14 });
   const [raised, setRaised] = useState(false);
-  const label = country.trim() || "Your Country";
+  const label = company.trim() || "Your Company";
 
   return (
     <div className="grid items-center gap-10 md:grid-cols-[1fr_1.1fr]">
       <div>
-        <label htmlFor="country" className="mb-3 block text-sm font-medium text-ink-3">
-          Which delegation are you hoping for?
+        <label htmlFor="company" className="mb-3 block text-sm font-medium text-ink-3">
+          Which company are you hoping to represent?
         </label>
         <input
-          id="country"
-          value={country}
-          onChange={(e) => setCountry(e.target.value.slice(0, 28))}
-          placeholder="Republic of Korea"
+          id="company"
+          value={company}
+          onChange={(e) => setCompany(e.target.value.slice(0, 28))}
+          placeholder="SpaceX"
           className="display w-full border-b-2 border-ink/20 bg-transparent pb-2 text-4xl outline-none placeholder:text-ink/25 focus:border-laurel sm:text-5xl"
           autoComplete="off"
         />

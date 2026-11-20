@@ -3,12 +3,11 @@
 export type Member = { name: string; role: string; photo?: string };
 
 export const secretariat: Member[] = [
-  { name: "To be announced", role: "Secretary-General" },
-  { name: "To be announced", role: "Deputy Secretary-General" },
-  { name: "To be announced", role: "Director-General" },
-  { name: "To be announced", role: "Head of Logistics" },
-  { name: "To be announced", role: "Head of Media" },
-  { name: "To be announced", role: "Head of IT" },
+  { name: "To be announced", role: "President" },
+  { name: "To be announced", role: "Vice President, Head of Operations" },
+  { name: "To be announced", role: "Vice President, Head of R&T" },
+  { name: "To be announced", role: "Secretary" },
+  { name: "To be announced", role: "Joint Secretary" },
 ];
 
 export const advisors: Member[] = [

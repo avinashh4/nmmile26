@@ -3,9 +3,9 @@
 
 export const gallery: { src: string; caption: string; tall?: boolean }[] = [
   { src: "", caption: "Opening ceremony" },
-  { src: "", caption: "Security Council, day two", tall: true },
+  { src: "", caption: "Committee, day two", tall: true },
   { src: "", caption: "Unmoderated caucus" },
-  { src: "", caption: "Press corps at work", tall: true },
+  { src: "", caption: "VERITAS at work", tall: true },
   { src: "", caption: "Voting procedure" },
   { src: "", caption: "Awards" },
   { src: "", caption: "The secretariat", tall: true },

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { RegisterButton } from "@/components/register-button";
+import { registerLink } from "@/lib/registration";
 import { Letters } from "@/components/motion";
 import { Clause, Container } from "@/components/ui";
 import { councils, getCouncil } from "@/content/councils";
@@ -110,7 +110,20 @@ export default async function CouncilPage({ params }: PageProps<"/councils/[slug
               ),
             )}
           </div>
-          <RegisterButton className="mt-10" />
+          {(() => {
+            const link = registerLink(c.role ?? "delegate");
+            return (
+              <a
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel="noreferrer"
+                className="group mt-10 inline-flex h-12 items-center gap-2 rounded-full bg-laurel px-6 font-semibold text-paper shadow-[inset_0_-3px_0_rgb(0_0_0/.2)] transition-colors hover:bg-laurel-2"
+              >
+                {link.open ? `Register for ${c.abbr}` : `Notify me when ${c.abbr} opens`}
+                <span className="transition-transform group-hover:translate-x-0.5">→</span>
+              </a>
+            );
+          })()}
         </aside>
       </Container>
 

@@ -12,13 +12,19 @@ export const site = {
   pillars: ["Initiative", "Leadership", "Excellence"],
   host: "New Millennium School, Bahrain",
   venue: "New Millennium School, Bahrain",
-  // Set to an ISO date once confirmed, e.g. "2026-12-12T08:00:00+03:00".
-  // While null, the site shows "Dates announced soon".
-  startsAt: null as string | null,
+  // Conference dates (Bahrain time). The hero shows these with a live countdown.
+  startsAt: "2026-12-11T08:00:00+03:00" as string | null,
+  endsAt: "2026-12-12T17:00:00+03:00" as string | null,
   days: 2,
-  registrationOpen: false,
-  registerUrl: "", // Google Form / Tally link. Empty keeps the button in "opening soon" state.
-  email: "nmmun@nms.edu.bh", // TODO: confirm address
+  // Registration form for each role (Google Form, Tally, etc.).
+  // Leave a link empty and its button says "Notify me" and opens an email instead.
+  registration: {
+    delegate: "" as string,
+    chair: "" as string,
+    press: "" as string,
+    volunteer: "" as string,
+  },
+  email: "nmmile.bh@gmail.com",
   instagram: "https://www.instagram.com/", // TODO: add handle
   theme: {
     title: "Ante Cras",
@@ -27,6 +33,9 @@ export const site = {
       "Ante cras is Latin for \"before tomorrow\". The money, machines, media and laws that will shape the next decade are being argued over right now. This year delegates step in before tomorrow arrives, and decide what it looks like.",
   },
 } as const;
+
+/** True once at least one registration form is linked. */
+export const registrationOpen = Object.values(site.registration).some(Boolean);
 
 export const stats = [
   { value: String(councils.length).padStart(2, "0"), label: "Councils" },
@@ -41,7 +50,7 @@ export const reasons = [
     title: "Learn how the world negotiates",
     photo: "/photos/lobbying.webp",
     alt: "Delegates lobbying with draft papers between sessions",
-    body: "Research a country you have never visited and defend its interests under pressure, in its own logic.",
+    body: "Step into a company you have never worked for and defend its interests under pressure, in its own logic.",
   },
   {
     n: "02",
@@ -99,8 +108,8 @@ export const faqs = [
     a: "Lunch and refreshments are provided each day. Tell us about dietary requirements on the registration form.",
   },
   {
-    q: "How are country allocations decided?",
-    a: "You list your council and country preferences on the form. The secretariat allocates by preference, experience and the order forms arrive.",
+    q: "How are allocations decided?",
+    a: "You list your council and company preferences on the form. The secretariat allocates by preference, experience and the order forms arrive.",
   },
   {
     q: "What do I wear?",

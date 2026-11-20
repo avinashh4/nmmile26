@@ -11,7 +11,8 @@ import { RegisterButton } from "@/components/register-button";
 import { ScheduleSoon } from "@/components/schedule-soon";
 import { Clause, Container } from "@/components/ui";
 import { councils } from "@/content/councils";
-import { faqs, photos, reasons, schedule, site, stats } from "@/content/site";
+import { faqs, photos, reasons, registrationOpen, schedule, site, stats } from "@/content/site";
+import { registerLink, roles } from "@/lib/registration";
 
 export default function Home() {
   return (
@@ -28,7 +29,7 @@ export default function Home() {
         <Container className="pointer-events-none relative pt-24 sm:pt-28">
           <div className="fade-up flex flex-wrap items-center gap-3 text-sm font-medium text-ink-2" style={{ ["--d" as string]: "0.1s" }}>
             <span className="stamp text-laurel">Bahrain {site.year}</span>
-            <span>{site.pillars.join(". ")}. At {site.host.split(",")[0]}.</span>
+            <span>{site.fullName}</span>
           </div>
           <h1 className="display mt-4 text-[clamp(4.5rem,15vw,13rem)] leading-[0.82]">
             <Letters text={site.shortName} />
@@ -39,7 +40,7 @@ export default function Home() {
               {site.theme.title}: <span className="text-laurel">{site.theme.translation}.</span>
             </span>
             <br />
-            <Countdown to={site.startsAt} />
+            <Countdown from={site.startsAt} to={site.endsAt} />
           </p>
         </Container>
         <div className="fade-up absolute right-4 bottom-6 hidden text-right text-sm text-ink-2 sm:right-8 lg:block" style={{ ["--d" as string]: "1.6s" }}>
@@ -293,7 +294,9 @@ export default function Home() {
           </p>
           <Reveal>
             <p className="mx-auto mt-6 max-w-lg text-xl text-paper/85">
-              Applications for delegates, chairs and press open soon. Leave your details and we will write when they do.
+              {registrationOpen
+                ? "Registration is open for delegates, chairs, VERITAS and volunteers. Pick your role below."
+                : "Applications for delegates, chairs, VERITAS and volunteers open soon. Tap your role and we will write when they do."}
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <RegisterButton size="lg" />
@@ -303,6 +306,25 @@ export default function Home() {
               >
                 Contact the secretariat
               </Link>
+            </div>
+            <div className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+              {roles.map((r) => {
+                const link = registerLink(r.key);
+                return (
+                  <a
+                    key={r.key}
+                    href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel="noreferrer"
+                    className="group rounded-2xl border-2 border-paper/20 bg-ink/30 px-4 py-4 text-left backdrop-blur-sm transition-colors hover:border-gold hover:bg-ink/50"
+                  >
+                    <span className="display block text-3xl">{r.title}</span>
+                    <span className="mt-1 block text-sm font-medium text-paper/70 group-hover:text-gold">
+                      {link.open ? "Register" : "Notify me"} →
+                    </span>
+                  </a>
+                );
+              })}
             </div>
           </Reveal>
         </Container>
