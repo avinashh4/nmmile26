@@ -19,10 +19,10 @@ export const site = {
   // Registration form for each role (Google Form, Tally, etc.).
   // Leave a link empty and its button says "Notify me" and opens an email instead.
   registration: {
-    delegate: "" as string,
-    chair: "" as string,
-    press: "" as string,
-    volunteer: "" as string,
+    delegate: "https://docs.google.com/forms/d/e/1FAIpQLSdNZCMgQXXJmXL3BAZxzq_R9HO6uUn2i1AEm3H24NOdfNdqXQ/viewform" as string,
+    chair: "https://docs.google.com/forms/d/e/1FAIpQLSeI1S3UPMHhS8uUT7IrtgLQU4vd3QAHV8wwdCgp9fXdVUSPWw/viewform" as string,
+    security: "https://docs.google.com/forms/d/e/1FAIpQLSdUjdXkSXu2BWAzB0M0qI24vFjSQbOVNx12qmWXt1v8H1C7FA/viewform" as string,
+    runner: "https://docs.google.com/forms/d/e/1FAIpQLSdzzCLUm9aaAFv5DYyIuTFieK22UZ4IpiMlz3p7AeNvRw176A/viewform" as string,
   },
   email: "nmmile.bh@gmail.com",
   instagram: "https://www.instagram.com/", // TODO: add handle

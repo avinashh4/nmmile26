@@ -11,7 +11,6 @@ export type Council = {
   chairs: { name: string; role: string }[];
   guideUrl?: string; // study guide PDF, e.g. "/guides/astra.pdf"
   blurb?: string; // one line about the committee; leave out until confirmed
-  role?: "delegate" | "press"; // which registration form its button opens (default: delegate)
 };
 
 export const councils: Council[] = [
@@ -60,7 +59,6 @@ export const councils: Council[] = [
     slug: "veritas",
     abbr: "VERITAS",
     name: "The Truth",
-    role: "press",
     color: "#C8573A",
     agenda: [],
     chairs: [],

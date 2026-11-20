@@ -5,8 +5,8 @@ export type Role = keyof typeof site.registration;
 export const roles: { key: Role; title: string; body: string }[] = [
   { key: "delegate", title: "Delegate", body: "Represent a company in one of the councils." },
   { key: "chair", title: "Chair", body: "Run a council. Prior conference experience required." },
-  { key: "press", title: "VERITAS", body: "Join the press team: report, photograph and publish the daily bulletin." },
-  { key: "volunteer", title: "Volunteer", body: "Logistics, admin and keeping the day on time." },
+  { key: "security", title: "Security", body: "Keep the venue safe and the conference running smoothly." },
+  { key: "runner", title: "Runner", body: "Carry notes between delegates and keep every council moving." },
 ];
 
 /** Where a role's register button should go: its form if linked, otherwise a pre-filled email. */

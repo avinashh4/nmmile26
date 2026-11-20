@@ -111,7 +111,7 @@ export default async function CouncilPage({ params }: PageProps<"/councils/[slug
             )}
           </div>
           {(() => {
-            const link = registerLink(c.role ?? "delegate");
+            const link = registerLink("delegate");
             return (
               <a
                 href={link.href}

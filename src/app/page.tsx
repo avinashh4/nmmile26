@@ -295,8 +295,8 @@ export default function Home() {
           <Reveal>
             <p className="mx-auto mt-6 max-w-lg text-xl text-paper/85">
               {registrationOpen
-                ? "Registration is open for delegates, chairs, VERITAS and volunteers. Pick your role below."
-                : "Applications for delegates, chairs, VERITAS and volunteers open soon. Tap your role and we will write when they do."}
+                ? "Registration is open for delegates, chairs, security and runners. Pick your role below."
+                : "Applications for delegates, chairs, security and runners open soon. Tap your role and we will write when they do."}
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <RegisterButton size="lg" />
