@@ -28,7 +28,7 @@ export default function ContactPage() {
           <div>
             <p className="text-sm font-medium text-ink-3">Instagram</p>
             <a href={site.instagram} target="_blank" rel="noreferrer" className="display text-4xl hover:text-laurel">
-              Follow along
+              @nmmile.bh
             </a>
           </div>
           <div>

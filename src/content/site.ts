@@ -25,7 +25,7 @@ export const site = {
     runner: "https://docs.google.com/forms/d/e/1FAIpQLSdzzCLUm9aaAFv5DYyIuTFieK22UZ4IpiMlz3p7AeNvRw176A/viewform" as string,
   },
   email: "nmmile.bh@gmail.com",
-  instagram: "https://www.instagram.com/", // TODO: add handle
+  instagram: "https://www.instagram.com/nmmile.bh/",
   theme: {
     title: "Ante Cras",
     translation: "Before Tomorrow",

@@ -5,6 +5,7 @@ import { registerLink } from "@/lib/registration";
 import { Letters } from "@/components/motion";
 import { Clause, Container } from "@/components/ui";
 import { councils, getCouncil } from "@/content/councils";
+import { site } from "@/content/site";
 
 // every council is known at build time, so each page is fully prerendered
 export const ensureStatic = "navigation";
@@ -74,7 +75,13 @@ export default async function CouncilPage({ params }: PageProps<"/councils/[slug
             <div className="mt-8 rounded-2xl border-2 border-dashed hairline p-10">
               <span className="stamp text-laurel">Under embargo</span>
               <p className="display mt-6 text-4xl sm:text-5xl">Topics will be released with the study guide.</p>
-              <p className="mt-4 text-lg text-ink-2">Follow us on Instagram to hear first.</p>
+              <p className="mt-4 text-lg text-ink-2">
+                Follow{" "}
+                <a href={site.instagram} target="_blank" rel="noreferrer" className="font-semibold text-ink underline decoration-laurel decoration-2 underline-offset-4">
+                  @nmmile.bh
+                </a>{" "}
+                on Instagram to hear first.
+              </p>
             </div>
           )}
 
