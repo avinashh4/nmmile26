@@ -44,7 +44,7 @@ export function Footer() {
             {site.shortName} {site.year}. Hosted by {site.host}.
           </span>
         </div>
-        <span>Made by the {site.shortName} IT team.</span>
+        <span>Made by the {site.shortName} Team: Zoraiz Alraz, Avinash Nambiar, Aarav Nair</span>
       </div>
     </footer>
   );
