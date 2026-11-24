@@ -7,6 +7,7 @@ export type Council = {
   abbr: string; // shown on the banner and placard
   name?: string; // full name, if the abbreviation stands for something
   color: string; // banner colour in the hall and on the page
+  logo?: string; // council logo in /public, e.g. "/councils/astra.webp" (square works best)
   agenda: string[]; // leave empty until topics are released
   chairs: { name: string; role: string }[];
   guideUrl?: string; // study guide PDF, e.g. "/guides/astra.pdf"
@@ -20,6 +21,7 @@ export const councils: Council[] = [
     // TODO: secretariat to pick one: "Financial Innovation & Exchange" or "Global Financial Network"
     name: "Financial Innovation & Exchange",
     color: "#2E5E5A",
+    logo: "/councils/finex.webp",
     agenda: [],
     chairs: [],
   },
@@ -28,6 +30,7 @@ export const councils: Council[] = [
     abbr: "ASTRA",
     name: "Alliance for Space Technology, Resources, and Authority",
     color: "#2B3A7A",
+    logo: "/councils/astra.webp",
     agenda: [],
     chairs: [],
   },
@@ -36,6 +39,7 @@ export const councils: Council[] = [
     abbr: "JURIS",
     name: "Judicial Union for Rights, Integrity, and Statutes",
     color: "#1B1A17",
+    logo: "/councils/juris.webp",
     agenda: [],
     chairs: [],
   },
@@ -44,6 +48,7 @@ export const councils: Council[] = [
     abbr: "NEXUS",
     name: "Network for Entertainment, Xtreme Media, and Universal Streaming",
     color: "#A2326B",
+    logo: "/councils/nexus.webp",
     agenda: [],
     chairs: [],
   },
@@ -52,6 +57,7 @@ export const councils: Council[] = [
     abbr: "TERRA",
     name: "The Environmental Research and Resource Alliance",
     color: "#5C7F3A",
+    logo: "/councils/terra.webp",
     agenda: [],
     chairs: [],
   },
@@ -60,6 +66,7 @@ export const councils: Council[] = [
     abbr: "VERITAS",
     name: "The Truth",
     color: "#C8573A",
+    logo: "/councils/veritas.webp",
     agenda: [],
     chairs: [],
   },
@@ -68,6 +75,7 @@ export const councils: Council[] = [
     abbr: "NOVA",
     name: "Network for Opportunities, Vision, and Artificial Intelligence",
     color: "#6B4FA0",
+    logo: "/councils/nova.webp",
     agenda: [],
     chairs: [],
   },
@@ -76,6 +84,7 @@ export const councils: Council[] = [
     abbr: "SHIELD",
     name: "Summit for Human Integrity, Ethics, and Digital Life",
     color: "#3F6FB0",
+    logo: "/councils/shield.webp",
     agenda: [],
     chairs: [],
   },
@@ -83,6 +92,7 @@ export const councils: Council[] = [
     slug: "spiderverse",
     abbr: "SPIDERVERSE",
     color: "#B3261E",
+    logo: "/councils/spiderverse.webp",
     agenda: [],
     chairs: [],
   },
@@ -90,6 +100,7 @@ export const councils: Council[] = [
     slug: "odyssey",
     abbr: "ODYSSEY",
     color: "#B08D4A",
+    logo: "/councils/odyssey.webp",
     agenda: [],
     chairs: [],
   },
@@ -97,6 +108,7 @@ export const councils: Council[] = [
     slug: "fifa",
     abbr: "FIFA",
     color: "#1F7A8C",
+    logo: "/councils/fifa.webp",
     agenda: [],
     chairs: [],
   },

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { registerLink } from "@/lib/registration";
@@ -41,18 +42,27 @@ export default async function CouncilPage({ params }: PageProps<"/councils/[slug
           <Link href="/councils" className="text-sm font-medium text-paper/70 hover:text-paper">
             ← All councils
           </Link>
-          <p className="mt-10 font-medium text-paper/70">
-            Council {String(i + 1).padStart(2, "0")} of {councils.length}
-          </p>
-          <h1 className="display mt-3 text-[clamp(4rem,13vw,11rem)] break-words">
-            <Letters text={c.abbr} />
-          </h1>
-          {c.name && c.name !== c.abbr && (
-            <p className="display fade-up mt-4 max-w-3xl text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.02] text-paper/90" style={{ ["--d" as string]: "0.7s" }}>
-              {c.name}
-            </p>
-          )}
-          {c.blurb && <p className="mt-6 max-w-xl text-xl text-paper/85">{c.blurb}</p>}
+          <div className="mt-10 grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_auto]">
+            <div className="min-w-0">
+              <p className="font-medium text-paper/70">
+                Council {String(i + 1).padStart(2, "0")} of {councils.length}
+              </p>
+              <h1 className="display mt-3 text-[clamp(4rem,13vw,11rem)] break-words">
+                <Letters text={c.abbr} />
+              </h1>
+              {c.name && c.name !== c.abbr && (
+                <p className="display fade-up mt-4 max-w-3xl text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.02] text-paper/90" style={{ ["--d" as string]: "0.7s" }}>
+                  {c.name}
+                </p>
+              )}
+              {c.blurb && <p className="mt-6 max-w-xl text-xl text-paper/85">{c.blurb}</p>}
+            </div>
+            {c.logo && (
+              <div className="relative order-first aspect-square w-40 overflow-hidden rounded-full ring-8 ring-paper/90 shadow-[0_30px_60px_-30px_rgb(0_0_0/.6)] sm:w-56 md:order-none md:w-72 lg:w-80">
+                <Image src={c.logo} alt={`${c.abbr} logo`} fill priority sizes="(min-width: 1024px) 320px, (min-width: 768px) 288px, 224px" className="object-cover" />
+              </div>
+            )}
+          </div>
         </Container>
       </section>
       <div className="perforated -mt-2" style={{ background: c.color }} />

@@ -129,10 +129,17 @@ export function Hall({
             <div className="h-1.5" style={{ background: near.color }} />
             <div className="flex items-center gap-4 p-4">
               <div
-                className="display grid h-14 w-14 shrink-0 place-items-center rounded-xl text-2xl text-paper"
+                className={`display relative grid h-14 w-14 shrink-0 place-items-center overflow-hidden text-2xl text-paper ${near.logo ? "rounded-full" : "rounded-xl"}`}
                 style={{ background: near.color }}
               >
-                {near.abbr.length <= 5 ? near.abbr : near.abbr[0]}
+                {near.logo ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={near.logo} alt={`${near.abbr} logo`} className="absolute inset-0 h-full w-full object-cover" />
+                ) : near.abbr.length <= 5 ? (
+                  near.abbr
+                ) : (
+                  near.abbr[0]
+                )}
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-xs font-medium text-ink-3">You have reached</p>
@@ -172,7 +179,15 @@ function StaticFallback({ councils }: { councils: Council[] }) {
               transform: `rotate(${(i % 2 ? 1 : -1) * 2}deg)`,
             }}
           >
-            {c.abbr}
+            {c.logo ? (
+              <span className="flex flex-col items-center gap-2">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={c.logo} alt="" className="h-16 w-16 rounded-full object-cover ring-2 ring-paper/90" />
+                <span className="text-xs">{c.abbr}</span>
+              </span>
+            ) : (
+              c.abbr
+            )}
           </Link>
         ))}
       </div>

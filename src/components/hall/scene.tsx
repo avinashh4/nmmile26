@@ -185,10 +185,19 @@ function Booth({
   active: boolean;
   onPick: () => void;
 }) {
+  // load the council logo (if any); the banner redraws with it once it arrives
+  const [logo, setLogo] = useState<HTMLImageElement | null>(null);
+  useEffect(() => {
+    if (!council.logo) return;
+    const el = new Image();
+    el.onload = () => setLogo(el);
+    el.src = council.logo;
+  }, [council.logo]);
   const banner = useMemo(
-    () => bannerTexture(council.abbr, council.name ?? "", council.color, index),
-    [council, index],
+    () => bannerTexture(council.abbr, council.name ?? "", council.color, index, logo),
+    [council, index, logo],
   );
+  useEffect(() => () => banner.dispose(), [banner]);
   const placard = useMemo(() => placardTexture(council.abbr, council.color), [council]);
   const flag = useRef<THREE.Mesh>(null!);
   const ring = useRef<THREE.Mesh>(null!);

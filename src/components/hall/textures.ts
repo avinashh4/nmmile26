@@ -127,8 +127,12 @@ export function floorTexture(title: string, ringText: string) {
   return tex(c);
 }
 
-/** Tall council banner: colour field, big abbreviation, full name. */
-export function bannerTexture(abbr: string, name: string, color: string, index: number) {
+/**
+ * Tall council banner: colour field, big abbreviation, full name.
+ * When the council logo has loaded it is laid over the upper half as a framed picture,
+ * and the abbreviation and name move underneath it.
+ */
+export function bannerTexture(abbr: string, name: string, color: string, index: number, logo: HTMLImageElement | null = null) {
   const W = 512;
   const H = 1024;
   const c = document.createElement("canvas");
@@ -147,18 +151,42 @@ export function bannerTexture(abbr: string, name: string, color: string, index: 
   ctx.fillStyle = PAPER;
   ctx.textAlign = "center";
   ctx.font = `600 34px ${sans}`;
-  ctx.fillText(`Council ${String(index + 1).padStart(2, "0")}`, W / 2, 110);
+  ctx.fillText(`Council ${String(index + 1).padStart(2, "0")}`, W / 2, logo ? 96 : 110);
+
+  if (logo) {
+    // logo cut into a circle, cropped to fill, with a thin paper ring around it
+    const box = W - 112;
+    const bx = (W - box) / 2;
+    const by = 130;
+    const r = box / 2;
+    const cx = bx + r;
+    const cy = by + r;
+    ctx.fillStyle = PAPER;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r + 7, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.clip();
+    const k = Math.max(box / logo.naturalWidth, box / logo.naturalHeight);
+    const sw = box / k;
+    const sh = box / k;
+    ctx.drawImage(logo, (logo.naturalWidth - sw) / 2, (logo.naturalHeight - sh) / 2, sw, sh, bx, by, box, box);
+    ctx.restore();
+    ctx.fillStyle = PAPER;
+  }
 
   // fit abbreviation
-  let size = 230;
+  let size = logo ? 120 : 230;
   ctx.font = `800 ${size}px ${serif}`;
-  while (ctx.measureText(abbr).width > W - 90 && size > 60) {
+  while (ctx.measureText(abbr).width > W - 90 && size > 40) {
     size -= 6;
     ctx.font = `800 ${size}px ${serif}`;
   }
-  ctx.fillText(abbr, W / 2, H * 0.47);
+  ctx.fillText(abbr, W / 2, logo ? 650 : H * 0.47);
 
-  ctx.font = `500 36px ${sans}`;
+  ctx.font = `500 ${logo ? 32 : 36}px ${sans}`;
   const words = name.split(" ");
   const lines: string[] = [];
   let line = "";
@@ -170,7 +198,7 @@ export function bannerTexture(abbr: string, name: string, color: string, index: 
     } else line = t;
   }
   lines.push(line);
-  lines.forEach((l, i) => ctx.fillText(l, W / 2, H * 0.62 + i * 46));
+  lines.forEach((l, i) => ctx.fillText(l, W / 2, logo ? 712 + i * 40 : H * 0.62 + i * 46));
 
   // pennant notch at bottom
   ctx.globalCompositeOperation = "destination-out";
